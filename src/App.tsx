@@ -1,10 +1,15 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DashboardPage from "./pages/dashboard";
+import CreateTaskPage from "./pages/createTask";
+
 function App() {
   return (
-    <>
-      <div className="h-10">
-        <h1 className="text-cyan-200">React 18 Alpha</h1>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DashboardPage />} />
+        <Route path="/create-task" element={<CreateTaskPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
