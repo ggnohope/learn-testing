@@ -21,7 +21,12 @@ export const createTask = async ({
   title: string;
   description: string;
 }) => {
-  const response = await axiosInstance.post("/tasks", { title, description });
+  const response = await axiosInstance.post("/todos/add", {
+    todo: title,
+    description,
+    completed: false,
+    userId: 5,
+  });
   return response.data.data;
 };
 

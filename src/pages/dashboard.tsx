@@ -5,12 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getTasks } from "../services/taskService";
 import TaskCard from "../components/taskCard";
 import { faker } from "@faker-js/faker";
-
-export interface ITask {
-  id: string;
-  todo: string;
-  completed: boolean;
-}
+import { ITask } from "../interfaces";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -59,7 +54,7 @@ const DashboardPage = () => {
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => {
-              navigate("/dashboard/create");
+              navigate("/create-task");
             }}
           >
             Create Task
