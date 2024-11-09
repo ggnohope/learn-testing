@@ -1,7 +1,7 @@
 import { TASK_STATUS } from "../constants";
 import axiosInstance from "./axios";
 
-export const getTasks = async ({
+export const getTasksApi = async ({
   limit,
   skip,
 }: {
@@ -14,7 +14,7 @@ export const getTasks = async ({
   return response.data.todos;
 };
 
-export const createTask = async ({
+export const createTaskApi = async ({
   title,
   description,
 }: {
@@ -30,7 +30,7 @@ export const createTask = async ({
   return response.data.data;
 };
 
-export const updateTask = async ({
+export const updateTaskApi = async ({
   id,
   value,
 }: {
@@ -43,7 +43,7 @@ export const updateTask = async ({
   return response.data.data;
 };
 
-export const deleteTask = async ({ id }: { id: string }) => {
+export const deleteTaskApi = async ({ id }: { id: string }) => {
   const response = await axiosInstance.delete(`/todos/${id}`);
   return response.data;
 };

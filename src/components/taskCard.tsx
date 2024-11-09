@@ -1,7 +1,8 @@
 import { Card, Select, Button, Row, Col, message } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { TASK_UPDATE_STATUS_OPTIONS } from "../constants";
-import { deleteTask, updateTask } from "../services/taskService";
+import { deleteTask, updateTask } from "../redux/tasksSlice";
+import { useDispatch } from "react-redux";
 
 interface TaskCardProps {
   id: string;
@@ -11,9 +12,11 @@ interface TaskCardProps {
 }
 
 const Task = ({ id, title, description, status }: TaskCardProps) => {
+  const dispatch = useDispatch();
+
   const handleDeleteTask = async () => {
     try {
-      await deleteTask({ id });
+      dispatch(deleteTask(id));
     } catch {
       message.error("Failed to delete task");
     }
@@ -21,7 +24,7 @@ const Task = ({ id, title, description, status }: TaskCardProps) => {
 
   const handleStatusChange = async (value: string) => {
     try {
-      await updateTask({ id, value });
+      dispatch(updateTask({ id, completed: value }));
     } catch {
       message.error("Failed to update task status");
     }

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Input, Button, Form, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import { createTask } from "../services/taskService";
+import { useDispatch } from "react-redux";
+import { addTask } from "../redux/tasksSlice";
 
 interface Fields {
   title: string;
@@ -22,6 +23,7 @@ const CreateTaskPage = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: InputChangeEvent) => {
     const { name, value } = e.target;
@@ -35,7 +37,7 @@ const CreateTaskPage = () => {
     const { title, description } = fields;
 
     try {
-      await createTask({ title, description });
+      dispatch(addTask({ title, description }));
       navigate("/");
     } catch {
       message.error("Failed to create task");

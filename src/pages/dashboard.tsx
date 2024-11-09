@@ -1,29 +1,14 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Empty, message } from "antd";
-import { useEffect, useState } from "react";
+import { Button, Empty } from "antd";
 import { useNavigate } from "react-router-dom";
-import { getTasks } from "../services/taskService";
 import TaskCard from "../components/taskCard";
 import { faker } from "@faker-js/faker";
-import { ITask } from "../interfaces";
+import { useSelector } from "react-redux";
+import { tasksSelector } from "../redux/selectors";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
-  const [tasks, setTasks] = useState<ITask[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const tasks = await getTasks({ limit: 10, skip: 0 });
-        setTasks(tasks);
-      } catch (error) {
-        if (error instanceof Error) {
-          message.error(error.message);
-        }
-      }
-    };
-    fetchData();
-  }, []);
+  const tasks = useSelector(tasksSelector);
 
   const renderTasks = () => {
     if (!tasks || tasks.length === 0) {
